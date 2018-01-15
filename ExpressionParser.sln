@@ -5,6 +5,7 @@ VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8B7DDA91-008F-4AF8-BB53-6A6DC920274B}"
 	ProjectSection(SolutionItems) = preProject
+		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -32,17 +33,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADA7D122-23BE-4B93-948E-DABB89299F90}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://andrevianna.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ExpressionParser\\ExpressionParser.csproj
-		SccProjectName1 = ExpressionParser
-		SccLocalPath1 = ExpressionParser
-		SccProjectUniqueName2 = ExpressionParser.Tests\\ExpressionParser.Tests.csproj
-		SccProjectName2 = ExpressionParser.Tests
-		SccLocalPath2 = ExpressionParser.Tests
 	EndGlobalSection
 EndGlobal

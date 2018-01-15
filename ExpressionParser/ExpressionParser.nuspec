@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AndreVianna.ExpressionParser</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Andre Vianna</authors>
+    <owners>Andre Vianna</owners>
+    <licenseUrl>https://github.com/AndreVianna/ExpressionParser/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/AndreVianna/ExpressionParser</projectUrl>
+    <iconUrl>https://github.com/AndreVianna/ExpressionParser/blob/master/Icon256.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial package.</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>Parser C# Linq Expression Dyanmic</tags>
+  </metadata>
+</package>
