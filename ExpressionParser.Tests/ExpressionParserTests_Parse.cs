@@ -74,6 +74,10 @@ namespace ExpressionParser.Tests
 		[TestCase("true false")]
 		[TestCase("3 ?? 4")]
 		[TestCase("'ab'")]
+		[TestCase("t?b:c")]
+		[TestCase("(int)abc")]
+		[TestCase("abc is int")]
+		[TestCase("abc as int == 3")]
 		public void ExpressionParser_Parse_WithInvalidInput_ShouldThrow(string input)
 		{
 			Assert.That(() => ExpressionParser.Parse(input), Throws.Exception);

@@ -144,6 +144,8 @@ namespace ExpressionParser.Engine
 				case "(":
 				case ")":
 				case ",":
+				case "?":
+				case ":":
 					result.Add(new SymbolToken(token));
 					characterPosition++;
 					return true;
