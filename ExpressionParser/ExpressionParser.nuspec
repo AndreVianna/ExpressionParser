@@ -13,6 +13,6 @@
     <description>$description$</description>
     <releaseNotes>Initial package.</releaseNotes>
     <copyright>Copyright 2018</copyright>
-    <tags>Parser C# Linq Expression Dyanmic</tags>
+    <tags>Parser C# Linq Expression Dynamic</tags>
   </metadata>
 </package>
