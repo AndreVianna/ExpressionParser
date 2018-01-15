@@ -16,59 +16,53 @@ Delegate ExpressionParser.ParseFor<TInput>(string input)
 
 ### Prerequisites
 
-There is no prerequisite to install and use the methods in your code.
+There is no prerequisite to install and use the methods included in this library.
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+You can install the ExpressionParser by downloading it as a NuGet package:
 
 ```
-Give the example
+Install-Package CSharp.ExpressionParser
 ```
 
-And repeat
+After that you can just use the call directly from your code.
+Here is a couple of usage example:
 
 ```
-until finished
+var result1 = ExpressionParser.Parse<int>("(3 + 2) * 3")(); //result1 should be an integer of value 15
+var result2 = ExpressionParser.ParseFor<SomeClass, bool>("Id == 23 && IsActive == true")(instance);  //result2 should be a boolean that the value shoul depend on the instance provided as input
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
+If you don't know the output of the result in advande you can use:
 ```
-Give an example
+var expression = ExpressionParser.Parse(someStringToBeParsed); //expression will have a delegate returning an object.
+var result = expression.DynamicInvoke();  //result will have the result of the expression as an object.
+```
+Here are a few samples of expressions that will be accepted by the case above:
+```
+"2.0 / 5.0" ==> Expected result: 0.4 (decimal)
+"3 + 2 * 3" ==> Expected result: 9 (int)
+"1 >= 1" ==> Expected result: true (bool)
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
+This is also supported when a input value is provided, but in this case the type of the input has to be informed.
+Here is an example:
 
 ```
-Give an example
+var expression = ExpressionParser.ParseFor<SomeClass>(someStringToBeParsed);
+var result = expression.DynamicInvoke(instaceOfTypeSomeClass);
 ```
 
-## Deployment
+More examples can be found in the test project.
 
-Add additional notes about how to deploy this on a live system
+## The tests
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+A Nunit test project is provided in the solution.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
@@ -76,9 +70,9 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Andre Vianna** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Andre Vianna** - *Initial work* - [AndreVianna]https://github.com/AndreVianna)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/AndreVianna/ExpressionParser/graphs/contributors) who participated in this project.
 
 ## License
 

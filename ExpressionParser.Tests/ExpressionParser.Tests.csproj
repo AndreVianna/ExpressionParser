@@ -50,10 +50,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExpressionParserTests_Parser.cs" />
+    <Compile Include="ExpressionParserTests_Parse.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="TestDoubles\DummyRelation.cs" />
-    <Compile Include="ExpressionParserTests_ParserFor.cs" />
+    <Compile Include="ExpressionParserTests_ParseFor.cs" />
     <Compile Include="TestDoubles\OtherDummy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDoubles\SomeDummy.cs" />
