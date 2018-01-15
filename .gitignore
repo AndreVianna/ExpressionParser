@@ -286,3 +286,8 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/BuildProcessTemplates/UpgradeTemplate.xaml
+/BuildProcessTemplates/LabDefaultTemplate.11.xaml
+/BuildProcessTemplates/DefaultTemplate.11.1.xaml
+/BuildProcessTemplates/AzureContinuousDeployment.11.xaml
+/ExpressionParser/FilterExpressionSyntax.txt
