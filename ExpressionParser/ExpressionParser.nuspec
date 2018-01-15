@@ -11,7 +11,11 @@
     <iconUrl>https://raw.githubusercontent.com/AndreVianna/ExpressionParser/master/Icon256.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial package.</releaseNotes>
+    <releaseNotes>
+1.0.1.30394 - Sign the library with a strong key.
+1.0.1.29845 - Make library compatible with .Net Framework 4.5.1 or higher.
+1.0.1.23396 - Initial RTM package.
+    </releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>Parser C# Linq Expression Dynamic</tags>
   </metadata>
