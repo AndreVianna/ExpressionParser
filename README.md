@@ -5,14 +5,25 @@ The function can be called with or without a parameter or as part of a LINQ quer
 
 ## Getting Started
 
-The library contains a static class with 4 methods:
+The library contains a static class with 4 methods for parsing:
 
 ```csharp
-Func<TOutput> ExpressionParser.Parse<TOutput>(string input)
-Delegate ExpressionParser.Parse(string input)
-Func<TInput, TOutput> ExpressionParser.ParseFor<TInput, TOutput>(string input)
-Delegate ExpressionParser.ParseFor<TInput>(string input)
+Func<TOutput> Parse<TOutput>(string input)
+Delegate Parse(string input)
+Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input)
+Delegate ParseFor<TInput>(string input)
 ```
+
+And 3 methods used to give support to external types:
+
+```csharp
+IExpressionParser Using(Type type, string alias = null)
+IExpressionParser Using(IEnumerable<Type> types)
+IExpressionParser Using(IDictionary<Type, string> typeMap)
+```
+
+All methods are also exposed by the public interface `IExpressionParser`.
+
 
 ### Prerequisites
 
@@ -54,9 +65,16 @@ var expression = ExpressionParser.ParseFor<SomeClass>(someStringToBeParsed);
 var result = expression.DynamicInvoke(instaceOfTypeSomeClass);
 ```
 
+In order to support external types or interfaces you can use the `Using` method to add those types to be used in a type cast scenario. For example:
+
+```csharp
+var result = ExpressionParser.Using(new { typeof(IPerson), type(IMovie) }).Parse<bool>("((Person)record.Person).Age > ((Movie)record.Movie).AgeLimit")(record);
+```
+
+
 More examples can be found in the test project.
 
-## Supported Operators
+## Supported Operators and Types
 
 Here is a list of [supported operators](FEATURES.md).
 

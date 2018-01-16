@@ -12,9 +12,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-1.0.1.30394 - Sign the library with a strong key.
-1.0.1.29845 - Make library compatible with .Net Framework 4.5.1 or higher.
-1.0.1.23396 - Initial RTM package.
+1.1.0   - Add support to type cast.
+        - Include support to default System type (see documentation).
+        - Include "Using" methods to reference additional type.
+1.0.1.* - Initial package; Compatible with .Net Framework 4.5.1.
     </releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>Parser C# Linq Expression Dynamic</tags>

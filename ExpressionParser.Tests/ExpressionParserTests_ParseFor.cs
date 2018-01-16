@@ -12,9 +12,9 @@ namespace ExpressionParser.Tests
 		private OtherDummy other1;
 		private OtherDummy other2;
 		private OtherDummy other3;
-		private DummyRelation dummyOther1;
-		private DummyRelation dummyOther2;
-		private DummyRelation dummyOther3;
+		private SomeOther dummyOther1;
+		private SomeOther dummyOther2;
+		private SomeOther dummyOther3;
 
 		[SetUp]
 		public void Setup()
@@ -23,9 +23,9 @@ namespace ExpressionParser.Tests
 			other1 = new OtherDummy {StringProperty = "A"};
 			other2 = new OtherDummy {StringProperty = "B"};
 			other3 = new OtherDummy {StringProperty = "A"};
-			dummyOther1 = new DummyRelation { Some = dummy, Other = other1 };
-			dummyOther2 = new DummyRelation { Some = dummy, Other = other2 };
-			dummyOther3 = new DummyRelation { Some = dummy, Other = other3 };
+			dummyOther1 = new SomeOther { Some = dummy, Other = other1 };
+			dummyOther2 = new SomeOther { Some = dummy, Other = other2 };
+			dummyOther3 = new SomeOther { Some = dummy, Other = other3 };
 			dummy.ManyNavigation.Add(dummyOther1);
 			dummy.ManyNavigation.Add(dummyOther2);
 			dummy.ManyNavigation.Add(dummyOther3);

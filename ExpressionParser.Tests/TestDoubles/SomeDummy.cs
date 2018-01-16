@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace ExpressionParser.Tests.TestDoubles
 {
 	[ExcludeFromCodeCoverage]
-	internal class SomeDummy
+	internal class SomeDummy : ISomeDummy, ISomeDummy1
 	{
 		public bool TrueProperty { get; set; } = true;
 		public bool FalseProperty { get; set; } = false;
@@ -15,6 +15,6 @@ namespace ExpressionParser.Tests.TestDoubles
 		public int[] ArrayProperty { get; } = { 1, 2, 3, 4 };
 
 		public OtherDummy SingleNavigation { get; set; } = new OtherDummy();
-		public ICollection<DummyRelation> ManyNavigation { get; } = new List<DummyRelation>();
+		public ICollection<SomeOther> ManyNavigation { get; } = new List<SomeOther>();
 	}
 }

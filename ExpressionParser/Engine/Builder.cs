@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using ExpressionParser.Model;
 using ExpressionParser.Model.Nodes;
 
@@ -7,6 +10,27 @@ namespace ExpressionParser.Engine
 {
 	internal class Builder
 	{
+		private static readonly IDictionary<string, Type> availableTypes = new Dictionary<string, Type>(Keywords.BuiltInTypes);
+
+		internal LambdaExpression BuildExpression(TokenList tokens, Assembly callingAssembly)
+		{
+			var root = BuildTree(tokens);
+			var body = root.BuildExpression();
+			return Expression.Lambda(body);
+		}
+
+		internal LambdaExpression BuildExpressionFor<TInput>(TokenList tokens, Assembly callingAssembly, string parameterName = null)
+		{
+			var root = BuildTree(tokens);
+			var parameterExpression = parameterName == null ? Expression.Parameter(typeof(TInput)) : Expression.Parameter(typeof(TInput), parameterName);
+			var body = root.BuildExpression(parameterExpression);
+			return Expression.Lambda(body, parameterExpression);
+		}
+
+		internal void AddTypeMap(string alias, Type type) => availableTypes[alias] = type;
+
+		internal static Type GetMappedType(string typeName) => availableTypes.ContainsKey(typeName) ? availableTypes[typeName] : throw new Exception($"Type '{typeName}' not mapped.");
+
 		private static Node BuildTree(TokenList tokens)
 		{
 			var nodes = new NodeStack();
@@ -50,21 +74,6 @@ namespace ExpressionParser.Engine
 			nodes.Add(new ArrayIndexNode());
 			var childNode = BuildTree(tokens);
 			nodes.Add(childNode);
-		}
-
-		internal static LambdaExpression BuildExpression(TokenList tokens)
-		{
-			var root = BuildTree(tokens);
-			var body = root.BuildExpression();
-			return Expression.Lambda(body);
-		}
-
-		internal static LambdaExpression BuildExpressionFor<TInput>(TokenList tokens, string parameterName = null)
-		{
-			var root = BuildTree(tokens);
-			var parameterExpression = parameterName == null ? Expression.Parameter(typeof(TInput)) : Expression.Parameter(typeof(TInput), parameterName);
-			var body = root.BuildExpression(parameterExpression);
-			return Expression.Lambda(body, parameterExpression);
 		}
 	}
 }

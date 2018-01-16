@@ -10,19 +10,11 @@ namespace ExpressionParser.Engine
 		private readonly TokenList result = new TokenList();
 		private int characterPosition;
 
-		private Reader() { }
-
-		internal static TokenList ReadFrom(string input)
-		{
-			var reader = new Reader();
-			reader.ReadAll(input);
-			return reader.result;
-		}
-
-		private void ReadAll(string input)
+		public TokenList ReadFrom(string input)
 		{
 			for (characterPosition = 0; characterPosition < input.Length;)
 				ProcessCharacter(input);
+			return result;
 		}
 
 		private void ProcessCharacter(string line)
@@ -92,7 +84,7 @@ namespace ExpressionParser.Engine
 
 		private bool FindName(string candidate)
 		{
-			return TryCreateToken(candidate, @"^[a-zA-Z_][\w]*$", a => new NameToken(a));
+			return TryCreateToken(candidate, @"^[a-zA-Z_][\w]*$", a => new NameToken(a) { Type = "Property", });
 		}
 
 		private bool TryCreateToken(string source, string regex, Func<string, Token> creator)
@@ -100,7 +92,7 @@ namespace ExpressionParser.Engine
 			var match = Regex.Match(source, regex, RegexOptions.IgnoreCase);
 			if (!match.Success) return false;
 			var token = creator(match.Value);
-			if (token != null) result.Add(creator(match.Value));
+			if (token != null) result.Add(token);
 			characterPosition += match.Length;
 			return true;
 		}
@@ -141,12 +133,25 @@ namespace ExpressionParser.Engine
 				case ".":
 				case "[":
 				case "]":
-				case "(":
-				case ")":
 				case ",":
 				case "?":
 				case ":":
 					result.Add(new SymbolToken(token));
+					characterPosition++;
+					return true;
+				case "(":
+					if (result.TokenAt(result.Count - 1) is NameToken methodCandidate)
+						methodCandidate.Type = "Method";
+					result.Add(new SymbolToken(token));
+					characterPosition++;
+					return true;
+				case ")":
+					if (result.TokenAt(result.Count - 1) is NameToken typeCastCandidate && result.TokenAt(result.Count - 2) is SymbolToken openTypeCastCandidate && openTypeCastCandidate.Symbol == "(")
+					{
+						typeCastCandidate.Type = "TypeCast";
+						result.RemoveTokenBeforeLast();
+					}
+					else result.Add(new SymbolToken(token));
 					characterPosition++;
 					return true;
 				default:

@@ -13,7 +13,7 @@ Each section has a higher precedence than the next one.
   * `+x` – Numeric value of `x`;  
   * `-x` – Numeric negation;  
   * `!x` – Logical negation;  
-  * ~~`(T)x` - Type cast.~~ [Not Supported. Planned for future versions]  
+  * `(T)x` - Type cast.  
 
 #### Multiplicative Operators  
   * `x * y` – Multiplication;  
@@ -50,3 +50,25 @@ Each section has a higher precedence than the next one.
 
 #### Lambda Operator  
   * `=>` – Lambda declaration;  
+
+
+### C# "Out of the Box" Supported Types 
+No need to call the Using method.
+
+````
+bool	        Boolean
+byte	        Byte
+sbyte	        SByte
+char	        Char
+decimal	        Decimal
+double	        Double
+float	        Single
+int 	        Int32
+uint	        UInt32
+long	        Int64
+ulong	        UInt64
+object	        Object
+short	        Int16
+ushort	        UInt16
+string	        String
+````

@@ -68,6 +68,17 @@ namespace ExpressionParser.Tests
 			return result();
 		}
 
+		[TestCase("(int)1", ExpectedResult = 1)]
+		[TestCase("(string)\"Hi\"", ExpectedResult = "Hi")]
+		[TestCase("(decimal)3", ExpectedResult = 3.0)]
+		[TestCase("(decimal)3 + 6.0", ExpectedResult = 9.0)]
+		[TestCase("(int)5.0 / (int)3.0", ExpectedResult = 1)]
+		public object ExpressionParser_Parse_WithValid_TypeCase_ShouldPass(string input)
+		{
+			var result = ExpressionParser.Parse(input);
+			return result.DynamicInvoke();
+		}
+
 		[TestCase("abc")]
 		[TestCase("abc()")]
 		[TestCase("%&%&")]
@@ -76,6 +87,7 @@ namespace ExpressionParser.Tests
 		[TestCase("'ab'")]
 		[TestCase("t?b:c")]
 		[TestCase("(int)abc")]
+		[TestCase("(invalidType)abc")]
 		[TestCase("abc is int")]
 		[TestCase("abc as int == 3")]
 		public void ExpressionParser_Parse_WithInvalidInput_ShouldThrow(string input)
