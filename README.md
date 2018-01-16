@@ -65,10 +65,10 @@ var expression = ExpressionParser.ParseFor<SomeClass>(someStringToBeParsed);
 var result = expression.DynamicInvoke(instaceOfTypeSomeClass);
 ```
 
-In order to support external types or interfaces you can use the `Using` method to add those types to be used in a type cast scenario. For example:
+In order to support external types or interfaces you can use the `Using` method to add them. For example:
 
 ```csharp
-var result = ExpressionParser.Using(new { typeof(IPerson), type(IMovie) }).Parse<bool>("((Person)record.Person).Age > ((Movie)record.Movie).AgeLimit")(record);
+var result = ExpressionParser.Using(new { typeof(IPerson), type(IMovie) }).Parse<bool>("((IPerson)record.Person).Age > ((IMovie)record.Movie).AgeLimit")(record);
 ```
 
 
