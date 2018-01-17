@@ -94,7 +94,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Andre Vianna** - *Initial work* - [AndreVianna]https://github.com/AndreVianna)
+* **Andre Vianna** - *Initial work* - [AndreVianna](https://github.com/AndreVianna)
 
 See also the list of [contributors](https://github.com/AndreVianna/ExpressionParser/graphs/contributors) who participated in this project.
 
