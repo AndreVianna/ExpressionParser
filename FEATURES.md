@@ -29,8 +29,8 @@ Each section has a higher precedence than the next one.
   * `x > y` – Greater than;  
   * `x <= y` – Less than or equal to;  
   * `x >= y` – Greater than or equal to;  
-  * ~~`x is T` - Type compatibility.~~ [Not Supported. Planned for future versions]  
-  * ~~`x as T` - Type convertion.~~ [Not Supported. Planned for future versions]  
+  * `x is T` - Type compatibility.  
+  * `x as T` - Type convertion.  
 
 #### Equality Operators  
   * `x == y` – Equal to (by default, for reference types other than string, this returns reference equality);  

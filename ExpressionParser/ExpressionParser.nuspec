@@ -12,7 +12,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-1.1.0   - Add support to type cast.
+1.2.0   - Added support to type 'is' and 'as' operators.
+1.1.0   - Added support to type cast.
         - Include support to default System type (see documentation).
         - Include "Using" methods to reference additional type.
 1.0.1.* - Initial package; Compatible with .Net Framework 4.5.1.
