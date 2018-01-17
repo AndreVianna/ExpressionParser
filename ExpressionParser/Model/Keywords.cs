@@ -37,5 +37,152 @@ namespace ExpressionParser.Model
 			{ "UInt16", typeof(ushort) },
 			{ "String", typeof(string) },
 		};
+
+		internal static readonly IEnumerable<string> TypeDefinition = new[]
+		{
+			"interface",
+			"class",
+			"enum",
+			"struct",
+		};
+
+		internal static readonly IEnumerable<string> Query = new[]
+		{
+			"from",
+			"where",
+			"select",
+			"group",
+			"into",
+			"orderby",
+			"join",
+			"let",
+			"in",
+			"on",
+			"equals",
+			"by",
+			"ascending",
+			"descending",
+		};
+
+		internal static readonly IEnumerable<string> Contextual = new[]
+		{
+			"add",
+			"async",
+			"await",
+			"dynamic",
+			"get",
+			"global",
+			"partial",
+			"remove",
+			"set",
+			"value",
+			"var",
+			"when",
+			"where",
+			"yield",
+		};
+
+		internal static readonly IEnumerable<string> MemberAccess = new[]
+		{
+			"this",
+			"base",
+		};
+
+		internal static readonly IEnumerable<string> Conversion = new[]
+		{
+			"explicit",
+			"implicit",
+			"operator",
+		};
+
+		internal static readonly IEnumerable<string> Operators = new[]
+		{
+			"as",
+			"await",
+			"is",
+			"new",
+			"nameof",
+			"sizeof",
+			"typeof",
+			"stackalloc",
+			"checked",
+			"unchecked",
+		};
+
+		internal static readonly IEnumerable<string> Statements = new[]
+		{
+			"if",
+			"else",
+			"switch",
+			"case",
+			"default",
+			"do",
+			"for",
+			"foreach",
+			"in",
+			"while",
+			"break",
+			"continue",
+			"goto",
+			"return",
+			"throw",
+			"try",
+			"catch",
+			"finally",
+			"checked",
+			"unchecked",
+			"fixed",
+			"lock",
+		};
+
+		internal static readonly IEnumerable<string> MethodDefinition = new[]
+		{
+			"delegate",
+			"void",
+			"params",
+			"ref",
+			"out",
+			"function",
+			"return",
+		};
+
+		internal static readonly IEnumerable<string> Namespace = new[]
+		{
+			"namespace",
+			"using",
+			"extern",
+		};
+
+		internal static readonly IEnumerable<string> Modifiers = new[]
+		{
+			"public",
+			"protected",
+			"internal",
+			"private",
+			"abstract",
+			"async",
+			"const",
+			"event",
+			"extern",
+			"new",
+			"override",
+			"partial",
+			"readonly",
+			"sealed",
+			"static",
+			"unsafe",
+			"virtual",
+			"volatile",
+			"in",
+			"out",
+		};
+
+		internal static readonly IEnumerable<string> Literals = new[]
+		{
+			"null",
+			"false",
+			"true",
+			"default",
+		};
 	}
 }

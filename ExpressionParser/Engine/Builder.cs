@@ -10,7 +10,7 @@ namespace ExpressionParser.Engine
 {
 	internal class Builder
 	{
-		private static readonly IDictionary<string, Type> availableTypes = new Dictionary<string, Type>(Keywords.BuiltInTypes);
+		//private static readonly IDictionary<string, Type> availableTypes = new Dictionary<string, Type>(Keywords.BuiltInTypes);
 
 		internal LambdaExpression BuildExpression(TokenList tokens, Assembly callingAssembly)
 		{
@@ -27,9 +27,9 @@ namespace ExpressionParser.Engine
 			return Expression.Lambda(body, parameterExpression);
 		}
 
-		internal void AddTypeMap(string alias, Type type) => availableTypes[alias] = type;
+		//internal void AddTypeMap(string alias, Type type) => availableTypes[alias] = type;
 
-		internal static Type GetMappedType(string typeName) => availableTypes.ContainsKey(typeName) ? availableTypes[typeName] : throw new Exception($"Type '{typeName}' not mapped.");
+		//internal static Type GetMappedType(string typeName) => availableTypes.ContainsKey(typeName) ? availableTypes[typeName] : throw new Exception($"Type '{typeName}' not mapped.");
 
 		private static Node BuildTree(TokenList tokens)
 		{

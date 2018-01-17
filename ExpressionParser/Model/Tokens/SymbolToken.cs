@@ -19,6 +19,8 @@ namespace ExpressionParser.Model.Tokens
 				case "-" when context.Previous == null || context.Previous is SymbolToken: return new NegateNode();
 				case "+" when context.Previous == null || context.Previous is SymbolToken: return new ValueNode();
 				case "!": return new NotNode();
+				case "is": return new TypeIsNode();
+				case "as": return new TypeAsNode();
 				case "==": return new EqualNode();
 				case "=>": return new LambdaNode();
 				case "!=": return new NotEqualNode();

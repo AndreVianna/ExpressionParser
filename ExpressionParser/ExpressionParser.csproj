@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="ExpressionParserImplementation.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="IExpressionParser.cs" />
     <Compile Include="Model\NodeStack.cs" />
     <Compile Include="ExpressionParser.cs" />
@@ -72,7 +73,10 @@
     <Compile Include="Model\Nodes\ModuloNode.cs" />
     <Compile Include="Model\Nodes\MultiplyNode.cs" />
     <Compile Include="Model\Nodes\NullPropagationNode.cs" />
+    <Compile Include="Model\Nodes\TypeAsNode.cs" />
     <Compile Include="Model\Nodes\TypeCastNode.cs" />
+    <Compile Include="Model\Nodes\TypeIsNode.cs" />
+    <Compile Include="Model\Nodes\TypeNode.cs" />
     <Compile Include="Model\Nodes\ValueNode.cs" />
     <Compile Include="Model\Nodes\NegateNode.cs" />
     <Compile Include="Model\Nodes\Node.cs" />
@@ -93,6 +97,7 @@
     <Compile Include="Model\Keywords.cs" />
     <Compile Include="Model\TokenList.cs" />
     <Compile Include="Model\Tokens\LiteralToken.cs" />
+    <Compile Include="Model\Tokens\TypeToken.cs" />
     <Compile Include="Model\Tokens\NameToken.cs" />
     <Compile Include="Model\Tokens\SymbolToken.cs" />
     <Compile Include="Engine\Builder.cs" />

@@ -1,26 +1,22 @@
-﻿using ExpressionParser.Engine;
-using System;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace ExpressionParser.Model.Nodes
 {
 	internal class TypeCastNode : UnaryNode
 	{
-		internal TypeCastNode(string typeName) : base(0)
+		internal TypeCastNode(Type type) : base(0)
 		{
-			TypeName = typeName;
+			Type = type;
 		}
 
-		internal string TypeName { get; }
+		internal Type Type { get; }
 
 		internal override Expression BuildExpression(Expression callerExpression = null)
 		{
-			var type = Builder.GetMappedType(TypeName);
 			var child = Child.BuildExpression(callerExpression);
-			if (type == child.Type) return child;
-			return Expression.ConvertChecked(child, type);
+			if (Type == child.Type) return child;
+			return Expression.ConvertChecked(child, Type);
 		}
 	}
 }

@@ -36,21 +36,21 @@ namespace ExpressionParser
 
 		public IExpressionParser Using(Type type, string alias)
 		{
-			builder.AddTypeMap(alias ?? type.Name, type);
+			reader.AddTypeMap(alias ?? type.Name, type);
 			return this;
 		}
 
 		public IExpressionParser Using(IEnumerable<Type> types)
 		{
 			foreach (var type in types)
-				builder.AddTypeMap(type.Name, type);
+				reader.AddTypeMap(type.Name, type);
 			return this;
 		}
 
 		public IExpressionParser Using(IDictionary<Type, string> typeMaps)
 		{
 			foreach (var typeMap in typeMaps)
-				builder.AddTypeMap(typeMap.Value, typeMap.Key);
+				reader.AddTypeMap(typeMap.Value, typeMap.Key);
 			return this;
 		}
 	}

@@ -16,9 +16,9 @@ namespace ExpressionParser.Model
 			Previous = Current;
 			RemoveAt(0);
 		}
-		internal void RemoveTokenBeforeLast()
+		internal void RemoveTokenAt(int position)
 		{
-			RemoveAt(Count - 2);
+			RemoveAt(position);
 		}
 
 	}

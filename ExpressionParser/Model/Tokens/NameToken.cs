@@ -6,21 +6,17 @@ namespace ExpressionParser.Model.Tokens
 	{
 		private readonly string name;
 
-		internal NameToken(string name) : base()
+		internal NameToken(string name, string nodeType) : base()
 		{
 			this.name = name;
+			NodeType = nodeType;
 		}
-
-		internal string Type { get; set; }
+		public string NodeType { get; set; }
 
 		internal override Node CreateNode(TokenList context)
 		{
-			switch (Type)
-			{
-				case "Method": return new MethodNode(name);
-				case "TypeCast": return new TypeCastNode(name);
-				default: return new PropertyNode(name);
-			}
+			if (NodeType == "Method") return new MethodNode(name);
+			return new PropertyNode(name);
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpressionParser.Extensions;
+using System;
 using System.Linq.Expressions;
 
 namespace ExpressionParser.Model.Nodes
@@ -11,9 +12,7 @@ namespace ExpressionParser.Model.Nodes
 		{
 			var left = Left.BuildExpression(callerExpression);
 			var right = Right.BuildExpression(Left.BuildExpression(callerExpression));
-			if (Nullable.GetUnderlyingType(right.Type) == null)
-				right = Expression.Convert(right, typeof(Nullable<>).MakeGenericType(right.Type));
-
+			if (!right.Type.IsNullable()) right = Expression.Convert(right, right.Type.MakeNullableType());
 			return Expression.Condition(Expression.Equal(left, Expression.Constant(null, left.Type)), Expression.Constant(null, right.Type), right);
 		}
 	}

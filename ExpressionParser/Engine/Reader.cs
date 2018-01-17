@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using ExpressionParser.Model;
 using ExpressionParser.Model.Tokens;
@@ -9,6 +10,9 @@ namespace ExpressionParser.Engine
 	{
 		private readonly TokenList result = new TokenList();
 		private int characterPosition;
+		private static readonly IDictionary<string, Type> availableTypes = new Dictionary<string, Type>(Keywords.BuiltInTypes);
+
+		internal void AddTypeMap(string alias, Type type) => availableTypes[alias] = type;
 
 		public TokenList ReadFrom(string input)
 		{
@@ -69,7 +73,7 @@ namespace ExpressionParser.Engine
 		{
 			var match = Regex.Match(line.Substring(characterPosition), @"^[\w]*", RegexOptions.IgnoreCase);
 			var candidate = match.Value;
-			return FindNull(candidate) || FindBoolean(candidate) || FindName(candidate);
+			return FindNull(candidate) || FindBoolean(candidate) || FindNamedOperator(candidate) || FindType(candidate) || FindName(candidate);
 		}
 
 		private bool FindNull(string candidate)
@@ -81,10 +85,22 @@ namespace ExpressionParser.Engine
 		{
 			return TryCreateToken(candidate, @"^(true|false)$", a => new LiteralToken<bool>(Convert.ToBoolean(a)));
 		}
+		private bool FindNamedOperator(string candidate)
+		{
+			return TryCreateToken(candidate, @"^(is|as)$", a => new SymbolToken(a));
+		}
+
+		private bool FindType(string candidate)
+		{
+			if (!availableTypes.TryGetValue(candidate, out var type)) return false;
+			result.Add(new TypeToken(type, "Type"));
+			characterPosition += candidate.Length;
+			return true;
+		}
 
 		private bool FindName(string candidate)
 		{
-			return TryCreateToken(candidate, @"^[a-zA-Z_][\w]*$", a => new NameToken(a) { Type = "Property", });
+			return TryCreateToken(candidate, @"^[a-zA-Z_][\w]*$", a => new NameToken(a, "Property"));
 		}
 
 		private bool TryCreateToken(string source, string regex, Func<string, Token> creator)
@@ -141,15 +157,15 @@ namespace ExpressionParser.Engine
 					return true;
 				case "(":
 					if (result.TokenAt(result.Count - 1) is NameToken methodCandidate)
-						methodCandidate.Type = "Method";
+						methodCandidate.NodeType = "Method";
 					result.Add(new SymbolToken(token));
 					characterPosition++;
 					return true;
 				case ")":
-					if (result.TokenAt(result.Count - 1) is NameToken typeCastCandidate && result.TokenAt(result.Count - 2) is SymbolToken openTypeCastCandidate && openTypeCastCandidate.Symbol == "(")
+					if (result.TokenAt(result.Count - 1) is TypeToken typeCastCandidate && result.TokenAt(result.Count - 2) is SymbolToken openTypeCastCandidate && openTypeCastCandidate.Symbol == "(")
 					{
-						typeCastCandidate.Type = "TypeCast";
-						result.RemoveTokenBeforeLast();
+						typeCastCandidate.NodeType = "TypeCast";
+						result.RemoveTokenAt(result.Count - 2);
 					}
 					else result.Add(new SymbolToken(token));
 					characterPosition++;

@@ -73,7 +73,13 @@ namespace ExpressionParser.Tests
 		[TestCase("(decimal)3", ExpectedResult = 3.0)]
 		[TestCase("(decimal)3 + 6.0", ExpectedResult = 9.0)]
 		[TestCase("(int)5.0 / (int)3.0", ExpectedResult = 1)]
-		public object ExpressionParser_Parse_WithValid_TypeCase_ShouldPass(string input)
+		[TestCase("1 is int", ExpectedResult = true)]
+		[TestCase("\"Hi\" is string", ExpectedResult = true)]
+		[TestCase("\"Hi\" is decimal", ExpectedResult = false)]
+		[TestCase("\"Hi\" as decimal", ExpectedResult = null)]
+		[TestCase("\"Hi\" as string", ExpectedResult = "Hi")]
+		[TestCase("3.0 as decimal", ExpectedResult = 3.0)]
+		public object ExpressionParser_Parse_WithValid_TypeOperations_ShouldPass(string input)
 		{
 			var result = ExpressionParser.Parse(input);
 			return result.DynamicInvoke();
