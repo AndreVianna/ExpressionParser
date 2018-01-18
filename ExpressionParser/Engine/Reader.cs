@@ -42,7 +42,7 @@ namespace ExpressionParser.Engine
 			return TryCreateToken(input.Substring(characterPosition), @"^('[^\\']'|'\\[\\'trn]')", a => new LiteralToken<char>(ConvertToChar(a.Substring(1, a.Length - 2))));
 		}
 
-		private char ConvertToChar(string source)
+		private static char ConvertToChar(string source)
 		{
 			switch (source)
 			{

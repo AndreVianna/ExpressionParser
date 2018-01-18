@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using ExpressionParser.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace ExpressionParser.Tests
 {
 	[TestFixture]
+	[ExcludeFromCodeCoverage]
 	public class ExpressionParserUsingTests
 	{
 		private SomeDummy dummy;

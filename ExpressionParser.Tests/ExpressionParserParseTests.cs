@@ -1,8 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System.Diagnostics.CodeAnalysis;
+using NUnit.Framework;
 
 namespace ExpressionParser.Tests
 {
 	[TestFixture]
+	[ExcludeFromCodeCoverage]
 	public class ExpressionParserParseTests
 	{
 		[TestCase("null", ExpectedResult = null)]

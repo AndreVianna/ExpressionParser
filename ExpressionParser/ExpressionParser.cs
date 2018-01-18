@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ExpressionParser
 {
-	public class ExpressionParser
+	public static class ExpressionParser
 	{
 		public static Delegate Parse(string input)
 		{
