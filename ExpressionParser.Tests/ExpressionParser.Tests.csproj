@@ -77,7 +77,6 @@
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="TestDoubles\IOtherDummy.cs" />
     <Compile Include="TestDoubles\ISomeDummy.cs" />
-    <Compile Include="TestDoubles\ISomeDummy1.cs" />
     <Compile Include="TestDoubles\SomeOther.cs" />
     <Compile Include="ExpressionParserParseForTests.cs" />
     <Compile Include="TestDoubles\OtherDummy.cs" />
