@@ -35,7 +35,7 @@ namespace ExpressionParser.Model
 			{ "Object", typeof(object) },
 			{ "Int16", typeof(short) },
 			{ "UInt16", typeof(ushort) },
-			{ "String", typeof(string) },
+			{ "String", typeof(string) }
 		};
 
 		internal static readonly IEnumerable<string> TypeDefinition = new[]
@@ -43,7 +43,7 @@ namespace ExpressionParser.Model
 			"interface",
 			"class",
 			"enum",
-			"struct",
+			"struct"
 		};
 
 		internal static readonly IEnumerable<string> Query = new[]
@@ -61,7 +61,7 @@ namespace ExpressionParser.Model
 			"equals",
 			"by",
 			"ascending",
-			"descending",
+			"descending"
 		};
 
 		internal static readonly IEnumerable<string> Contextual = new[]
@@ -79,20 +79,20 @@ namespace ExpressionParser.Model
 			"var",
 			"when",
 			"where",
-			"yield",
+			"yield"
 		};
 
 		internal static readonly IEnumerable<string> MemberAccess = new[]
 		{
 			"this",
-			"base",
+			"base"
 		};
 
 		internal static readonly IEnumerable<string> Conversion = new[]
 		{
 			"explicit",
 			"implicit",
-			"operator",
+			"operator"
 		};
 
 		internal static readonly IEnumerable<string> Operators = new[]
@@ -106,7 +106,7 @@ namespace ExpressionParser.Model
 			"typeof",
 			"stackalloc",
 			"checked",
-			"unchecked",
+			"unchecked"
 		};
 
 		internal static readonly IEnumerable<string> Statements = new[]
@@ -132,7 +132,7 @@ namespace ExpressionParser.Model
 			"checked",
 			"unchecked",
 			"fixed",
-			"lock",
+			"lock"
 		};
 
 		internal static readonly IEnumerable<string> MethodDefinition = new[]
@@ -143,14 +143,14 @@ namespace ExpressionParser.Model
 			"ref",
 			"out",
 			"function",
-			"return",
+			"return"
 		};
 
 		internal static readonly IEnumerable<string> Namespace = new[]
 		{
 			"namespace",
 			"using",
-			"extern",
+			"extern"
 		};
 
 		internal static readonly IEnumerable<string> Modifiers = new[]
@@ -174,7 +174,7 @@ namespace ExpressionParser.Model
 			"virtual",
 			"volatile",
 			"in",
-			"out",
+			"out"
 		};
 
 		internal static readonly IEnumerable<string> Literals = new[]
@@ -182,7 +182,7 @@ namespace ExpressionParser.Model
 			"null",
 			"false",
 			"true",
-			"default",
+			"default"
 		};
 	}
 }

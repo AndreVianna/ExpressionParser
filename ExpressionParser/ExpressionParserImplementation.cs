@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using ExpressionParser.Engine;
 
 namespace ExpressionParser
@@ -12,7 +11,7 @@ namespace ExpressionParser
 		public Delegate Parse(string input)
 		{
 			var tokens = reader.ReadFrom(input);
-			var expression = Builder.BuildExpression(tokens, Assembly.GetCallingAssembly());
+			var expression = Builder.BuildExpression(tokens);
 			return expression.Compile();
 		}
 
@@ -28,7 +27,7 @@ namespace ExpressionParser
 		public Delegate ParseFor<TInput>(string input, string parameterName)
 		{
 			var tokens = reader.ReadFrom(input);
-			var expression = Builder.BuildExpressionFor<TInput>(tokens, Assembly.GetCallingAssembly(), parameterName);
+			var expression = Builder.BuildExpressionFor<TInput>(tokens, parameterName);
 			return expression.Compile();
 		}
 
@@ -44,6 +43,7 @@ namespace ExpressionParser
 
 		public IExpressionParser Using(Type type)
 		{
+			if (type == null) throw new ArgumentNullException(nameof(type));
 			Reader.AddTypeMap(type.Name, type);
 			return this;
 		}
@@ -57,6 +57,7 @@ namespace ExpressionParser
 
 		public IExpressionParser Using(IEnumerable<Type> types)
 		{
+			if (types == null) throw new ArgumentNullException(nameof(types));
 			foreach (var type in types)
 				Reader.AddTypeMap(type.Name, type);
 			return this;
@@ -64,6 +65,7 @@ namespace ExpressionParser
 
 		public IExpressionParser Using(IDictionary<Type, string> typeMaps)
 		{
+			if (typeMaps == null) throw new ArgumentNullException(nameof(typeMaps));
 			foreach (var typeMap in typeMaps)
 				Reader.AddTypeMap(typeMap.Value, typeMap.Key);
 			return this;

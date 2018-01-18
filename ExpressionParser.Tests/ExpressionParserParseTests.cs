@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using NUnit.Framework;
 
 namespace ExpressionParser.Tests
@@ -98,6 +99,8 @@ namespace ExpressionParser.Tests
 		[TestCase("(invalidType)abc")]
 		[TestCase("abc is int")]
 		[TestCase("abc as int == 3")]
+		[TestCase("i => i")]
+		[TestCase("i => i == 0")]
 		public void ExpressionParser_Parse_WithInvalidInput_ShouldThrow(string input)
 		{
 			Assert.That(() => ExpressionParser.Parse(input), Throws.Exception);

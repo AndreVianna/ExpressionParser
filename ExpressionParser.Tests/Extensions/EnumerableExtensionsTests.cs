@@ -29,6 +29,7 @@ namespace ExpressionParser.Tests.Extensions
 		public void ToArray_ForNullCollection_ShouldPass()
 		{
 			IEnumerable<int> source = null;
+			// ReSharper disable once ExpressionIsAlwaysNull
 			Assert.That(source.ToArray(i => i.ToString()), Is.EquivalentTo(new string[] { }));
 		}
 	}

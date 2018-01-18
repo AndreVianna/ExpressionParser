@@ -15,8 +15,7 @@ namespace ExpressionParser.Model.Nodes
 		internal override Expression BuildExpression(Expression callerExpression = null)
 		{
 			var child = Child.BuildExpression(callerExpression);
-			if (Type == child.Type) return child;
-			return Expression.ConvertChecked(child, Type);
+			return Type == child.Type ? child : Expression.ConvertChecked(child, Type);
 		}
 	}
 }

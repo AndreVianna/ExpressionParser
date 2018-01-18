@@ -59,7 +59,7 @@ namespace ExpressionParser.Model.Nodes
 			return method;
 		}
 
-		private MethodInfo GetMethodInfoFromCandidates(MethodInfo[] candidates)
+		private MethodInfo GetMethodInfoFromCandidates(IEnumerable<MethodInfo> candidates)
 		{
 			return (from candidate in candidates
 				let parametersTypes = candidate.GetParameters().ToArray(p => p.ParameterType)

@@ -4,7 +4,7 @@ namespace ExpressionParser.Model.Tokens
 {
 	internal abstract class Token
 	{
-		internal abstract Node CreateNode(TokenList context);
+		internal abstract Node CreateNode();
 
 		internal virtual bool StartsIndex => false;
 		internal virtual bool EndsIndex => false;

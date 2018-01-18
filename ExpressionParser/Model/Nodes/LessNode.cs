@@ -2,9 +2,9 @@
 
 namespace ExpressionParser.Model.Nodes
 {
-	internal class LesserNode : BinaryNode
+	internal class LessNode : BinaryNode
 	{
-		internal LesserNode() : base(6) { }
+		internal LessNode() : base(6) { }
 
 		internal override Expression BuildExpression(Expression callerExpression = null)
 		{

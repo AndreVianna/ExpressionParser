@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using ExpressionParser.Model;
 using ExpressionParser.Model.Nodes;
 
@@ -8,14 +7,14 @@ namespace ExpressionParser.Engine
 {
 	internal static class Builder
 	{
-		internal static LambdaExpression BuildExpression(TokenList tokens, Assembly callingAssembly)
+		internal static LambdaExpression BuildExpression(TokenList tokens)
 		{
 			var root = BuildTree(tokens);
 			var body = root.BuildExpression();
 			return Expression.Lambda(body);
 		}
 
-		internal static LambdaExpression BuildExpressionFor<TInput>(TokenList tokens, Assembly callingAssembly, string parameterName = null)
+		internal static LambdaExpression BuildExpressionFor<TInput>(TokenList tokens, string parameterName)
 		{
 			var root = BuildTree(tokens);
 			var parameterExpression = parameterName == null ? Expression.Parameter(typeof(TInput)) : Expression.Parameter(typeof(TInput), parameterName);
@@ -38,7 +37,7 @@ namespace ExpressionParser.Engine
 					tokens.MoveNext();
 					ProcessIndex(tokens, nodes);
 				} else {
-					nodes.Add(tokens.Current.CreateNode(tokens));
+					nodes.Add(tokens.Current.CreateNode());
 				}
 
 				tokens.MoveNext();

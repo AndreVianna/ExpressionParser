@@ -10,7 +10,7 @@ namespace ExpressionParser.Model.Tokens
 			this.value = value;
 		}
 
-		internal override Node CreateNode(TokenList context)
+		internal override Node CreateNode()
 		{
 			return new LiteralNode<T>(value);
 		}

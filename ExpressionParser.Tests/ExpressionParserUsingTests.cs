@@ -43,9 +43,20 @@ namespace ExpressionParser.Tests
 			var types = new Dictionary<Type, string>
 			{
 				{ typeof(OtherDummy), "other" },
-				{ typeof(SomeOther), "navigation" },
+				{ typeof(SomeOther), "navigation" }
 			};
 			Assert.That(ExpressionParser.Using(types).ParseFor<SomeDummy, bool>("((other)SingleNavigation).TrueProperty")(dummy), Is.True);
+		}
+
+		[Test]
+		public void ExpressionParser_UsingTypeMap_WithNullAlias_ShouldThrow()
+		{
+			var types = new Dictionary<Type, string>
+			{
+				{ typeof(OtherDummy), "other" },
+				{ typeof(SomeOther), null }
+			};
+			Assert.That(() => ExpressionParser.Using(types).Parse<bool>("Anything")(), Throws.Exception);
 		}
 
 		[Test]
@@ -55,9 +66,17 @@ namespace ExpressionParser.Tests
 		}
 
 		[Test]
-		public void ExpressionParser_UsingLWithNullAlias_ShouldThoe()
+		public void ExpressionParser_UsingLWithNullAlias_ShouldThrow()
 		{
+		}
+
+		[Test]
+		public void ExpressionParser_UsingLWithNullArgument_ShouldThrow()
+		{
+			Assert.Throws<ArgumentNullException>(() => ExpressionParser.Using((Type)null).Parse<bool>("Anything")());
 			Assert.Throws<ArgumentNullException>(() => ExpressionParser.Using(typeof(SomeDummy), null).Parse<bool>("Anything")());
+			Assert.Throws<ArgumentNullException>(() => ExpressionParser.Using((IEnumerable<Type>)null).Parse<bool>("Anything")());
+			Assert.Throws<ArgumentNullException>(() => ExpressionParser.Using((IDictionary<Type, string>)null).Parse<bool>("Anything")());
 		}
 	}
 }

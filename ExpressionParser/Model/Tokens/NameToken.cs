@@ -13,7 +13,7 @@ namespace ExpressionParser.Model.Tokens
 		}
 		public string NodeType { get; set; }
 
-		internal override Node CreateNode(TokenList context)
+		internal override Node CreateNode()
 		{
 			if (NodeType == "Method") return new MethodNode(name);
 			return new PropertyNode(name);

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using ExpressionParser.Extensions;
 
 namespace ExpressionParser.Model.Nodes

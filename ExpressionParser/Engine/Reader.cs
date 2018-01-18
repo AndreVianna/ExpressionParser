@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using ExpressionParser.Model;
 using ExpressionParser.Model.Tokens;
@@ -12,7 +13,7 @@ namespace ExpressionParser.Engine
 		private int characterPosition;
 		private static readonly IDictionary<string, Type> availableTypes = new Dictionary<string, Type>(Keywords.BuiltInTypes);
 
-		internal static void AddTypeMap(string alias, Type type) => availableTypes[alias] = type;
+		internal static void AddTypeMap(string alias, Type type) => availableTypes[alias ?? type.Name] = type;
 
 		public TokenList ReadFrom(string input)
 		{
@@ -85,6 +86,7 @@ namespace ExpressionParser.Engine
 		{
 			return TryCreateToken(candidate, @"^(true|false)$", a => new LiteralToken<bool>(Convert.ToBoolean(a)));
 		}
+
 		private bool FindNamedOperator(string candidate)
 		{
 			return TryCreateToken(candidate, @"^(is|as)$", a => new SymbolToken(a));
@@ -117,65 +119,48 @@ namespace ExpressionParser.Engine
 		{
 			var current = input[characterPosition];
 			var next = characterPosition < (input.Length - 1) ? input[characterPosition + 1] : (char?)null;
-			var token = $"{current}{next}";
-			switch (token) {
-				case "!=":
-				case "==":
-				case "=>":
-				case ">=":
-				case "<=":
-				case "&&":
-				case "||":
-				case "??":
-				case "?.":
+			return FindSupportedSymbol($"{current}{next}") || FindSupportedSymbol($"{current}");
+		}
+
+		private bool FindSupportedSymbol(string token)
+		{
+			var candidates = TokenList.SupportedOperators.Keys.Where(i => i.Length == token.Length).ToArray();
+			var symbol = candidates.FirstOrDefault(s => s == token);
+			if (symbol == null) return false;
+			switch (symbol) {
+				case "is":
+				case "as":
+					return false;
+				case "+" when IsUnaryOperatorPattern():
+					result.Add(new SymbolToken("[+]"));
+					break;
+				case "-" when IsUnaryOperatorPattern():
+					result.Add(new SymbolToken("[-]"));
+					break;
+				case "(" when IsMethodtPattern(out var methodToken):
+					methodToken.NodeType = "Method";
 					result.Add(new SymbolToken(token));
-					characterPosition++;
-					characterPosition++;
-					return true;
+					break;
+				case ")" when IsTypeCastPattern(out var typeCastToken):
+					typeCastToken.NodeType = "TypeCast";
+					result.RemoveTokenAt(result.Count - 2);
+					break;
 				default:
-					token = $"{current}";
+					result.Add(new SymbolToken(token));
 					break;
 			}
-			switch (token)
-			{
-				case "!":
-				case ">":
-				case "<":
-				case "+":
-				case "-":
-				case "*":
-				case "/":
-				case "%":
-				case ".":
-				case "[":
-				case "]":
-				case ",":
-				case "?":
-				case ":":
-					result.Add(new SymbolToken(token));
-					characterPosition++;
-					return true;
-				case "(":
-					if (IsMethodtPattern(out var methodToken))
-						methodToken.NodeType = "Method";
-					result.Add(new SymbolToken(token));
-					characterPosition++;
-					return true;
-				case ")":
-					if (IsTypeCastPattern(out var typeCastToken)) {
-						typeCastToken.NodeType = "TypeCast";
-						result.RemoveTokenAt(result.Count - 2);
-					} else result.Add(new SymbolToken(token));
-					characterPosition++;
-					return true;
-				default:
-					return false;
-			}
+			characterPosition += token.Length;
+			return true;
+		}
+
+		private bool IsUnaryOperatorPattern()
+		{
+			return !result.Any() || (result.TokenAt(result.Count - 1) is SymbolToken);
 		}
 
 		private bool IsTypeCastPattern(out TypeToken token) {
-			token = (result.TokenAt(result.Count - 1) is TypeToken candidate 
-			    && result.TokenAt(result.Count - 2) is SymbolToken previousSymbol 
+			token = (result.TokenAt(result.Count - 1) is TypeToken candidate
+			    && result.TokenAt(result.Count - 2) is SymbolToken previousSymbol
 			    && previousSymbol.Symbol == "(") ? candidate : null;
 			return token != null;
 		}

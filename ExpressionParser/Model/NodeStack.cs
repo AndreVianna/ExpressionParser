@@ -45,7 +45,7 @@ namespace ExpressionParser.Model
 			node.Left = node.Left ?? root.Right;
 		}
 
-		private static void AttachNodeToRootRight(BinaryNode root, BinaryNode node)
+		private static void AttachNodeToRootRight(BinaryNode root, Node node)
 		{
 			root.Right = node;
 		}
