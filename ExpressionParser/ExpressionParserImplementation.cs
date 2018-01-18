@@ -8,12 +8,11 @@ namespace ExpressionParser
 	internal class ExpressionParserImplementation : IExpressionParser
 	{
 		private readonly Reader reader = new Reader();
-		private readonly Builder builder = new Builder();
 
 		public Delegate Parse(string input)
 		{
 			var tokens = reader.ReadFrom(input);
-			var expression = builder.BuildExpression(tokens, Assembly.GetCallingAssembly());
+			var expression = Builder.BuildExpression(tokens, Assembly.GetCallingAssembly());
 			return expression.Compile();
 		}
 
@@ -22,11 +21,20 @@ namespace ExpressionParser
 			return (Func<TOutput>)Parse(input);
 		}
 
+		public Delegate ParseFor<TInput>(string input) {
+			return ParseFor<TInput>(input, null);
+		}
+
 		public Delegate ParseFor<TInput>(string input, string parameterName)
 		{
 			var tokens = reader.ReadFrom(input);
-			var expression = builder.BuildExpressionFor<TInput>(tokens, Assembly.GetCallingAssembly(), parameterName);
+			var expression = Builder.BuildExpressionFor<TInput>(tokens, Assembly.GetCallingAssembly(), parameterName);
 			return expression.Compile();
+		}
+
+		public Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input)
+		{
+			return (Func<TInput, TOutput>)ParseFor<TInput>(input, null);
 		}
 
 		public Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input, string parameterName)

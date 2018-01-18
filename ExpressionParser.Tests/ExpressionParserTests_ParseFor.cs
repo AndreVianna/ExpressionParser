@@ -60,6 +60,20 @@ namespace ExpressionParser.Tests
 			return result(dummy);
 		}
 
+		[Test]
+		public void ExpressionParser_ParseFor_WithParameterName_ShouldPass()
+		{
+			var result = ExpressionParser.ParseFor<SomeDummy>("FalseProperty || (!(TrueProperty && FalseProperty) && TrueProperty)", "p");
+			Assert.That(result.DynamicInvoke(dummy), Is.True);
+		}
+
+		[Test]
+		public void ExpressionParser_ParseFor_WithParameterName_AndReturnType_ShouldPass()
+		{
+			var result = ExpressionParser.ParseFor<SomeDummy, bool>("FalseProperty || (!(TrueProperty && FalseProperty) && TrueProperty)", "p");
+			Assert.That(result(dummy), Is.True);
+		}
+
 		[TestCase("FalseProperty == false", ExpectedResult = true)]
 		[TestCase("FalseProperty == true", ExpectedResult = false)]
 		[TestCase("FalseProperty != true", ExpectedResult = true)]

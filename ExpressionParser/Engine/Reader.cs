@@ -156,23 +156,34 @@ namespace ExpressionParser.Engine
 					characterPosition++;
 					return true;
 				case "(":
-					if (result.TokenAt(result.Count - 1) is NameToken methodCandidate)
-						methodCandidate.NodeType = "Method";
+					if (IsMethodtPattern(out var methodToken))
+						methodToken.NodeType = "Method";
 					result.Add(new SymbolToken(token));
 					characterPosition++;
 					return true;
 				case ")":
-					if (result.TokenAt(result.Count - 1) is TypeToken typeCastCandidate && result.TokenAt(result.Count - 2) is SymbolToken openTypeCastCandidate && openTypeCastCandidate.Symbol == "(")
-					{
-						typeCastCandidate.NodeType = "TypeCast";
+					if (IsTypeCastPattern(out var typeCastToken)) {
+						typeCastToken.NodeType = "TypeCast";
 						result.RemoveTokenAt(result.Count - 2);
-					}
-					else result.Add(new SymbolToken(token));
+					} else result.Add(new SymbolToken(token));
 					characterPosition++;
 					return true;
 				default:
 					return false;
 			}
+		}
+
+		private bool IsTypeCastPattern(out TypeToken token) {
+			token = (result.TokenAt(result.Count - 1) is TypeToken candidate 
+			    && result.TokenAt(result.Count - 2) is SymbolToken previousSymbol 
+			    && previousSymbol.Symbol == "(") ? candidate : null;
+			return token != null;
+		}
+
+		private bool IsMethodtPattern(out NameToken token)
+		{
+			token = (result.TokenAt(result.Count - 1) is NameToken candidate) ? candidate : null;
+			return token != null;
 		}
 	}
 }

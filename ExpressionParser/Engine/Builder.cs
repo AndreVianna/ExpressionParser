@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using ExpressionParser.Model;
@@ -10,26 +8,20 @@ namespace ExpressionParser.Engine
 {
 	internal class Builder
 	{
-		//private static readonly IDictionary<string, Type> availableTypes = new Dictionary<string, Type>(Keywords.BuiltInTypes);
-
-		internal LambdaExpression BuildExpression(TokenList tokens, Assembly callingAssembly)
+		internal static LambdaExpression BuildExpression(TokenList tokens, Assembly callingAssembly)
 		{
 			var root = BuildTree(tokens);
 			var body = root.BuildExpression();
 			return Expression.Lambda(body);
 		}
 
-		internal LambdaExpression BuildExpressionFor<TInput>(TokenList tokens, Assembly callingAssembly, string parameterName = null)
+		internal static LambdaExpression BuildExpressionFor<TInput>(TokenList tokens, Assembly callingAssembly, string parameterName = null)
 		{
 			var root = BuildTree(tokens);
 			var parameterExpression = parameterName == null ? Expression.Parameter(typeof(TInput)) : Expression.Parameter(typeof(TInput), parameterName);
 			var body = root.BuildExpression(parameterExpression);
 			return Expression.Lambda(body, parameterExpression);
 		}
-
-		//internal void AddTypeMap(string alias, Type type) => availableTypes[alias] = type;
-
-		//internal static Type GetMappedType(string typeName) => availableTypes.ContainsKey(typeName) ? availableTypes[typeName] : throw new Exception($"Type '{typeName}' not mapped.");
 
 		private static Node BuildTree(TokenList tokens)
 		{
@@ -45,8 +37,10 @@ namespace ExpressionParser.Engine
 				} else if (tokens.Current.StartsIndex) {
 					tokens.MoveNext();
 					ProcessIndex(tokens, nodes);
-				} else
+				} else {
 					nodes.Add(tokens.Current.CreateNode(tokens));
+				}
+
 				tokens.MoveNext();
 			}
 			return nodes.Pop();
@@ -57,8 +51,9 @@ namespace ExpressionParser.Engine
 			while (!tokens.Current.EndsExpressionOrParameters) {
 				var childNode = BuildTree(tokens);
 				methodNode.Parameters.Add(childNode);
-				if (tokens.Current.IsParameterSeparator)
+				if (tokens.Current.IsParameterSeparator) {
 					tokens.MoveNext();
+				}
 			}
 		}
 
