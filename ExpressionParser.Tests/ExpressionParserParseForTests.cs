@@ -6,7 +6,7 @@ namespace ExpressionParser.Tests
 {
 	[TestFixture]
 	[ExcludeFromCodeCoverage]
-	public partial class ExpressionParserTests
+	public class ExpressionParserParseForTests
 	{
 		private SomeDummy dummy;
 		private OtherDummy other1;

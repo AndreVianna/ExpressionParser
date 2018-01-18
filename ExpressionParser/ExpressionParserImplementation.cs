@@ -42,23 +42,30 @@ namespace ExpressionParser
 			return (Func<TInput, TOutput>)ParseFor<TInput>(input, parameterName);
 		}
 
+		public IExpressionParser Using(Type type)
+		{
+			Reader.AddTypeMap(type.Name, type);
+			return this;
+		}
+
 		public IExpressionParser Using(Type type, string alias)
 		{
-			reader.AddTypeMap(alias ?? type.Name, type);
+			if (alias == null) throw new ArgumentNullException(nameof(alias));
+			Reader.AddTypeMap(alias, type);
 			return this;
 		}
 
 		public IExpressionParser Using(IEnumerable<Type> types)
 		{
 			foreach (var type in types)
-				reader.AddTypeMap(type.Name, type);
+				Reader.AddTypeMap(type.Name, type);
 			return this;
 		}
 
 		public IExpressionParser Using(IDictionary<Type, string> typeMaps)
 		{
 			foreach (var typeMap in typeMaps)
-				reader.AddTypeMap(typeMap.Value, typeMap.Key);
+				Reader.AddTypeMap(typeMap.Value, typeMap.Key);
 			return this;
 		}
 	}

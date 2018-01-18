@@ -20,7 +20,7 @@ namespace ExpressionParser.Model.Nodes
 
 		internal override Expression BuildExpression(Expression callerExpression = null)
 		{
-			if (callerExpression == null) throw new Exception($"Invalid method '{Name}'");
+			if (callerExpression == null) throw new InvalidOperationException($"Invalid method '{Name}'");
 			callerType = callerExpression.Type;
 			GetArguments(callerExpression);
 			GetMethodInfo(callerExpression);

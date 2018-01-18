@@ -6,7 +6,7 @@ namespace ExpressionParser.Model.Tokens
 	{
 		private readonly T value;
 
-		internal LiteralToken(T value) : base() {
+		internal LiteralToken(T value) {
 			this.value = value;
 		}
 

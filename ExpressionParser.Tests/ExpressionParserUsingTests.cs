@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using ExpressionParser.Tests.TestDoubles;
 using NUnit.Framework;
 
 namespace ExpressionParser.Tests
 {
 	[TestFixture]
-	public partial class ExpressionParserTests
+	public class ExpressionParserUsingTests
 	{
+		private SomeDummy dummy;
+
+		[SetUp]
+		public void Setup()
+		{
+			dummy = new SomeDummy();
+		}
+
+
 		[Test]
 		public void ExpressionParser_UsingSingleType_WithValidInput_ShouldPass()
 		{
@@ -42,6 +50,12 @@ namespace ExpressionParser.Tests
 		public void ExpressionParser_UsingListOfTypes_WithValidInput_ShouldPass()
 		{
 			Assert.That(ExpressionParser.Using(new [] { typeof(OtherDummy), typeof(SomeOther) }).ParseFor<SomeDummy, bool>("((OtherDummy)SingleNavigation).TrueProperty")(dummy), Is.True);
+		}
+
+		[Test]
+		public void ExpressionParser_UsingLWithNullAlias_ShouldThoe()
+		{
+			Assert.Throws<ArgumentNullException>(() => ExpressionParser.Using(typeof(SomeDummy), null).Parse<bool>("Anything")());
 		}
 	}
 }

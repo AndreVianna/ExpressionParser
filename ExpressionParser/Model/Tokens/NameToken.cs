@@ -6,7 +6,7 @@ namespace ExpressionParser.Model.Tokens
 	{
 		private readonly string name;
 
-		internal NameToken(string name, string nodeType) : base()
+		internal NameToken(string name, string nodeType)
 		{
 			this.name = name;
 			NodeType = nodeType;

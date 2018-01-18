@@ -41,7 +41,13 @@ namespace ExpressionParser
 			return parser.Using(new [] { typeof(TInput), typeof(TOutput) }).ParseFor<TInput, TOutput>(input, parameterName);
 		}
 
-		public static IExpressionParser Using(Type type, string alias = null)
+		public static IExpressionParser Using(Type type)
+		{
+			var parser = new ExpressionParserImplementation();
+			return parser.Using(type);
+		}
+
+		public static IExpressionParser Using(Type type, string alias)
 		{
 			var parser = new ExpressionParserImplementation();
 			return parser.Using(type, alias);

@@ -5,7 +5,7 @@ namespace ExpressionParser.Model.Tokens
 {
 	internal class SymbolToken : Token
 	{
-		internal SymbolToken(string symbol) : base()
+		internal SymbolToken(string symbol)
 		{
 			Symbol = symbol;
 		}
@@ -38,7 +38,7 @@ namespace ExpressionParser.Model.Tokens
 				case "/": return new DivideNode();
 				case "%": return new ModuloNode();
 				case ".": return new DotNode();
-				default: throw new Exception("Unsuported token.");
+				default: throw new InvalidOperationException("Unsuported token.");
 			}
 		}
 

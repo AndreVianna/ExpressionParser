@@ -12,7 +12,7 @@ namespace ExpressionParser.Engine
 		private int characterPosition;
 		private static readonly IDictionary<string, Type> availableTypes = new Dictionary<string, Type>(Keywords.BuiltInTypes);
 
-		internal void AddTypeMap(string alias, Type type) => availableTypes[alias] = type;
+		internal static void AddTypeMap(string alias, Type type) => availableTypes[alias] = type;
 
 		public TokenList ReadFrom(string input)
 		{
@@ -21,25 +21,25 @@ namespace ExpressionParser.Engine
 			return result;
 		}
 
-		private void ProcessCharacter(string line)
+		private void ProcessCharacter(string input)
 		{
-			if (FindValidToken(line)) return;
-			throw new Exception($"Invalid token at position {characterPosition + 1}.");
+			if (FindValidToken(input)) return;
+			throw new ArgumentException($"Invalid token at position {characterPosition + 1}.", nameof(input));
 		}
 
-		private bool FindValidToken(string line)
+		private bool FindValidToken(string input)
 		{
-			return FindWhiteSpace(line) || FindChar(line) || FindString(line) || FindDecimal(line) || FindInteger(line) || FindToken(line) || FindCandidate(line);
+			return FindWhiteSpace(input) || FindChar(input) || FindString(input) || FindDecimal(input) || FindInteger(input) || FindToken(input) || FindCandidate(input);
 		}
 
-		private bool FindWhiteSpace(string line)
+		private bool FindWhiteSpace(string input)
 		{
-			return TryCreateToken(line.Substring(characterPosition), @"^\s+", a => null);
+			return TryCreateToken(input.Substring(characterPosition), @"^\s+", a => null);
 		}
 
-		private bool FindChar(string line)
+		private bool FindChar(string input)
 		{
-			return TryCreateToken(line.Substring(characterPosition), @"^('[^\\']'|'\\[\\'trn]')", a => new LiteralToken<char>(ConvertToChar(a.Substring(1, a.Length - 2))));
+			return TryCreateToken(input.Substring(characterPosition), @"^('[^\\']'|'\\[\\'trn]')", a => new LiteralToken<char>(ConvertToChar(a.Substring(1, a.Length - 2))));
 		}
 
 		private char ConvertToChar(string source)
@@ -55,23 +55,23 @@ namespace ExpressionParser.Engine
 			}
 		}
 
-		private bool FindString(string line)
+		private bool FindString(string input)
 		{
-			return TryCreateToken(line.Substring(characterPosition), @"^""[^""]*""", a => new LiteralToken<string>(a.Trim('"')));
+			return TryCreateToken(input.Substring(characterPosition), @"^""[^""]*""", a => new LiteralToken<string>(a.Trim('"')));
 		}
 
-		private bool FindDecimal(string line)
+		private bool FindDecimal(string input)
 		{
-			return TryCreateToken(line.Substring(characterPosition), @"^((\d*\.\d+)|(\d+\.\d*))", a => new LiteralToken<decimal>(Convert.ToDecimal(a)));
+			return TryCreateToken(input.Substring(characterPosition), @"^((\d*\.\d+)|(\d+\.\d*))", a => new LiteralToken<decimal>(Convert.ToDecimal(a)));
 		}
-		private bool FindInteger(string line)
+		private bool FindInteger(string input)
 		{
-			return TryCreateToken(line.Substring(characterPosition), @"^\d+", a => new LiteralToken<int>(Convert.ToInt32(a)));
+			return TryCreateToken(input.Substring(characterPosition), @"^\d+", a => new LiteralToken<int>(Convert.ToInt32(a)));
 		}
 
-		private bool FindCandidate(string line)
+		private bool FindCandidate(string input)
 		{
-			var match = Regex.Match(line.Substring(characterPosition), @"^[\w]*", RegexOptions.IgnoreCase);
+			var match = Regex.Match(input.Substring(characterPosition), @"^[\w]*", RegexOptions.IgnoreCase);
 			var candidate = match.Value;
 			return FindNull(candidate) || FindBoolean(candidate) || FindNamedOperator(candidate) || FindType(candidate) || FindName(candidate);
 		}
@@ -113,10 +113,10 @@ namespace ExpressionParser.Engine
 			return true;
 		}
 
-		private bool FindToken(string line)
+		private bool FindToken(string input)
 		{
-			var current = line[characterPosition];
-			var next = characterPosition < (line.Length - 1) ? line[characterPosition + 1] : (char?)null;
+			var current = input[characterPosition];
+			var next = characterPosition < (input.Length - 1) ? input[characterPosition + 1] : (char?)null;
 			var token = $"{current}{next}";
 			switch (token) {
 				case "!=":

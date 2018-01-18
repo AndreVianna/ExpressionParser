@@ -37,7 +37,7 @@ namespace ExpressionParser.Model
 		private void AttachNodeToRoot(Node node)
 		{
 			if (!Peek().TryAddNode(node))
-				throw new Exception($"Error adding '{node.GetType().Name}' to '{Peek().GetType().Name}'.");
+				throw new InvalidOperationException($"Error adding '{node.GetType().Name}' to '{Peek().GetType().Name}'.");
 		}
 
 		private static void MoveRootRightToNodeLeft(BinaryNode root, BinaryNode node)

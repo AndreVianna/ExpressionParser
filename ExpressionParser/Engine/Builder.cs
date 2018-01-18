@@ -6,7 +6,7 @@ using ExpressionParser.Model.Nodes;
 
 namespace ExpressionParser.Engine
 {
-	internal class Builder
+	internal static class Builder
 	{
 		internal static LambdaExpression BuildExpression(TokenList tokens, Assembly callingAssembly)
 		{

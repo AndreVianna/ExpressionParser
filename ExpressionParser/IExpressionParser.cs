@@ -15,7 +15,8 @@ namespace ExpressionParser
 		Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input);
 		Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input, string parameterName);
 
-		IExpressionParser Using(Type type, string alias = null);
+		IExpressionParser Using(Type type);
+		IExpressionParser Using(Type type, string alias);
 		IExpressionParser Using(IEnumerable<Type> types);
 		IExpressionParser Using(IDictionary<Type, string> typeMaps);
 	}

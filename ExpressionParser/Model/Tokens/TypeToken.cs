@@ -7,7 +7,7 @@ namespace ExpressionParser.Model.Tokens
 	{
 		private readonly Type type;
 
-		internal TypeToken(Type type, string nodeType) : base()
+		internal TypeToken(Type type, string nodeType)
 		{
 			this.NodeType = nodeType;
 			this.type = type;

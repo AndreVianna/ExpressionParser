@@ -3,7 +3,7 @@
 namespace ExpressionParser.Tests
 {
 	[TestFixture]
-	public partial class ExpressionParserTests
+	public class ExpressionParserParseTests
 	{
 		[TestCase("null", ExpectedResult = null)]
 		[TestCase("true", ExpectedResult = true)]
