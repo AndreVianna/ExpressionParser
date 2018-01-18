@@ -12,7 +12,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-1.2.0   - Added support to type 'is' and 'as' operators.
+1.2.1   - Code clean up and small improvements.
+1.2.0   - Added support to 'is' and 'as' operators.
 1.1.0   - Added support to type cast.
         - Include support to default System type (see documentation).
         - Include "Using" methods to reference additional type.
