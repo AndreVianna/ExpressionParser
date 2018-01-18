@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using ExpressionParser.Model.Nodes;
 using ExpressionParser.Model.Tokens;
 
@@ -20,7 +21,7 @@ namespace ExpressionParser.Model
 			RemoveAt(position);
 		}
 
-		public static readonly IDictionary<string, Func<Node>> SupportedOperators = new Dictionary<string, Func<Node>>
+		public static readonly IReadOnlyDictionary<string, Func<Node>> SupportedOperators = new Dictionary<string, Func<Node>>
 		{
 			{"[+]", () => new ValueNode()},
 			{"[-]", () => new NegateNode()},
