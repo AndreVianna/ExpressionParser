@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using ExpressionParser.Model.Nodes;
 using ExpressionParser.Model.Tokens;
 
@@ -11,15 +10,7 @@ namespace ExpressionParser.Model
 		internal Token TokenAt(int position) => (position >= 0 && position < Count) ? this[position] : null;
 
 		internal Token Current => this[0];
-		internal void MoveNext()
-		{
-			RemoveAt(0);
-		}
-
-		internal void RemoveTokenAt(int position)
-		{
-			RemoveAt(position);
-		}
+		internal void MoveNext() => RemoveAt(0);
 
 		public static readonly IReadOnlyDictionary<string, Func<Node>> SupportedOperators = new Dictionary<string, Func<Node>>
 		{

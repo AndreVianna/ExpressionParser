@@ -1,21 +1,14 @@
-﻿using System;
-using ExpressionParser.Model.Nodes;
+﻿using ExpressionParser.Model.Nodes;
 
 namespace ExpressionParser.Model.Tokens
 {
 	internal class SymbolToken : Token
 	{
-		internal SymbolToken(string symbol)
-		{
-			Symbol = symbol;
-		}
+		internal SymbolToken(string symbol) => Symbol = symbol;
 
 		internal string Symbol { get; }
 
-		internal override Node CreateNode()
-		{
-			return TokenList.SupportedOperators[Symbol]();
-		}
+		internal override Node CreateNode() => TokenList.SupportedOperators[Symbol]();
 
 		internal override bool StartsIndex => Symbol == "[";
 		internal override bool EndsIndex => Symbol == "]";

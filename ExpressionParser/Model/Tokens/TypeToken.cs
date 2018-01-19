@@ -15,10 +15,6 @@ namespace ExpressionParser.Model.Tokens
 
 		public string NodeType { get; set; }
 
-		internal override Node CreateNode()
-		{
-			if (NodeType == "Type") return new TypeNode(type);
-			return new TypeCastNode(type);
-		}
+		internal override Node CreateNode() => NodeType == "Type" ? (Node) new TypeNode(type) : new TypeCastNode(type);
 	}
 }

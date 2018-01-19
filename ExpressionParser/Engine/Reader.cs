@@ -143,7 +143,7 @@ namespace ExpressionParser.Engine
 					break;
 				case ")" when IsTypeCastPattern(out var typeCastToken):
 					typeCastToken.NodeType = "TypeCast";
-					result.RemoveTokenAt(result.Count - 2);
+					result.RemoveAt(result.Count - 2);
 					break;
 				default:
 					result.Add(new SymbolToken(token));

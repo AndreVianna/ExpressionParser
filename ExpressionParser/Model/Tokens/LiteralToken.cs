@@ -6,13 +6,8 @@ namespace ExpressionParser.Model.Tokens
 	{
 		private readonly T value;
 
-		internal LiteralToken(T value) {
-			this.value = value;
-		}
+		internal LiteralToken(T value) => this.value = value;
 
-		internal override Node CreateNode()
-		{
-			return new LiteralNode<T>(value);
-		}
+		internal override Node CreateNode() => new LiteralNode<T>(value);
 	}
 }
