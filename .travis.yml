@@ -14,4 +14,4 @@ install:
   - nuget install NUnit.Runners -Version 3.7.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release ExpressionParser.sln
-  - mono testrunner/NUnit.Runners.3.7.0/tools/nunit3-console.exe ./ExpressionParser.Tests/bin/Release/ExpressionParser.Tests.dll
+  - mono testrunner/NUnit.Runners.3.7.0/tools/nunit3-console.exe ExpressionParser.Tests/bin/Release/ExpressionParser.Tests.dll
