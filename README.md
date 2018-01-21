@@ -3,7 +3,8 @@
 The project provides a simple expression parser that transforms a string into a valid C# expression representing a function.
 The function can be called with or without a parameter or as part of a LINQ query.
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2df98ec122e842a2912e48274cf5104f)](https://www.codacy.com/app/AndreVianna/ExpressionParser?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AndreVianna/ExpressionParser&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2df98ec122e842a2912e48274cf5104f)](https://www.codacy.com/app/AndreVianna/ExpressionParser?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AndreVianna/ExpressionParser&amp;utm_campaign=Badge_Grade) 
+[![Build Status](https://travis-ci.org/AndreVianna/ExpressionParser.svg?branch=master)](https://travis-ci.org/AndreVianna/ExpressionParser)
 
 ## Getting Started
 
