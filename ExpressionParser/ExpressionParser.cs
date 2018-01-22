@@ -11,35 +11,25 @@ namespace ExpressionParser
 			return parser.Parse(input);
 		}
 
+		public static Delegate ParseFor<TInput>(string input, string parameterName = null)
+		{
+			var parser = new ExpressionParserImplementation();
+			return parser.Using(new[] { typeof(TInput) }).ParseFor<TInput>(input, parameterName);
+		}
+
+
 		public static Func<TOutput> Parse<TOutput>(string input)
 		{
 			var parser = new ExpressionParserImplementation();
 			return parser.Parse<TOutput>(input);
 		}
 
-		public static Delegate ParseFor<TInput>(string input)
-		{
-			var parser = new ExpressionParserImplementation();
-			return parser.Using(new[] { typeof(TInput) }).ParseFor<TInput>(input);
-		}
-
-		public static Delegate ParseFor<TInput>(string input, string parameterName)
-		{
-			var parser = new ExpressionParserImplementation();
-			return parser.Using(new [] { typeof(TInput) }).ParseFor<TInput>(input, parameterName);
-		}
-
-		public static Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input)
-		{
-			var parser = new ExpressionParserImplementation();
-			return parser.Using(new[] { typeof(TInput), typeof(TOutput) }).ParseFor<TInput, TOutput>(input);
-		}
-
-		public static Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input, string parameterName)
+		public static Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input, string parameterName = null)
 		{
 			var parser = new ExpressionParserImplementation();
 			return parser.Using(new [] { typeof(TInput), typeof(TOutput) }).ParseFor<TInput, TOutput>(input, parameterName);
 		}
+
 
 		public static IExpressionParser Using(Type type)
 		{

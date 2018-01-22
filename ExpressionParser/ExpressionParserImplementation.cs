@@ -20,20 +20,11 @@ namespace ExpressionParser
 			return (Func<TOutput>)Parse(input);
 		}
 
-		public Delegate ParseFor<TInput>(string input) {
-			return ParseFor<TInput>(input, null);
-		}
-
 		public Delegate ParseFor<TInput>(string input, string parameterName)
 		{
 			var tokens = reader.ReadFrom(input);
 			var expression = Builder.BuildExpressionFor<TInput>(tokens, parameterName);
 			return expression.Compile();
-		}
-
-		public Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input)
-		{
-			return (Func<TInput, TOutput>)ParseFor<TInput>(input, null);
 		}
 
 		public Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input, string parameterName)

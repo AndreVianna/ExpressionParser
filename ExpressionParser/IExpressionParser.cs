@@ -9,11 +9,9 @@ namespace ExpressionParser
 
 		Func<TOutput> Parse<TOutput>(string input);
 
-		Delegate ParseFor<TInput>(string input);
-		Delegate ParseFor<TInput>(string input, string parameterName);
+		Delegate ParseFor<TInput>(string input, string parameterName = null);
 
-		Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input);
-		Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input, string parameterName);
+		Func<TInput, TOutput> ParseFor<TInput, TOutput>(string input, string parameterName = null);
 
 		IExpressionParser Using(Type type);
 		IExpressionParser Using(Type type, string alias);
