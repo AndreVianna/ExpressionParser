@@ -13,7 +13,7 @@ namespace ExpressionParser.Engine
 		private int characterPosition;
 		private static readonly IDictionary<string, Type> availableTypes = new Dictionary<string, Type>(Keywords.BuiltInTypes);
 
-		internal static void AddTypeMap(string alias, Type type) => availableTypes[alias ?? type.Name] = type;
+		internal static void AddTypeMap(string alias, Type type) => availableTypes[alias ?? type?.Name ?? throw new ArgumentNullException(nameof(type))] = type;
 
 		public TokenList ReadFrom(string input)
 		{

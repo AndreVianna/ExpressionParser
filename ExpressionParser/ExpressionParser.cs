@@ -31,13 +31,7 @@ namespace ExpressionParser
 		}
 
 
-		public static IExpressionParser Using(Type type)
-		{
-			var parser = new ExpressionParserImplementation();
-			return parser.Using(type);
-		}
-
-		public static IExpressionParser Using(Type type, string alias)
+		public static IExpressionParser Using(Type type, string alias = null)
 		{
 			var parser = new ExpressionParserImplementation();
 			return parser.Using(type, alias);

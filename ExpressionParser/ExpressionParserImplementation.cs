@@ -32,16 +32,8 @@ namespace ExpressionParser
 			return (Func<TInput, TOutput>)ParseFor<TInput>(input, parameterName);
 		}
 
-		public IExpressionParser Using(Type type)
-		{
-			if (type == null) throw new ArgumentNullException(nameof(type));
-			Reader.AddTypeMap(type.Name, type);
-			return this;
-		}
-
 		public IExpressionParser Using(Type type, string alias)
 		{
-			if (alias == null) throw new ArgumentNullException(nameof(alias));
 			Reader.AddTypeMap(alias, type);
 			return this;
 		}
