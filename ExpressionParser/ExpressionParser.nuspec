@@ -12,6 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
+1.2.2   - More code clean up and bug corrections.
 1.2.1   - Code clean up and small improvements.
 1.2.0   - Added support to 'is' and 'as' operators.
 1.1.0   - Added support to type cast.
